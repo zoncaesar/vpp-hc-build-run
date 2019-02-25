@@ -1,5 +1,4 @@
 
-export WS_DIR="/home/`whoami`/WS"
 mkdir $WS_DIR
 
 cd $WS_DIR
