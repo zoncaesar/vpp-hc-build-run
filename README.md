@@ -8,6 +8,7 @@ https://github.com/gyanranjan/vpp-build-dev-test-env
 
 
 sudo apt-get update
+
 sudo apt-get install git
 
 git clone https://github.com/zoncaesar/vpp-hc-build-run.git
