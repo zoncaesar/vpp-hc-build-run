@@ -18,7 +18,9 @@ git clone https://github.com/zoncaesar/vpp-hc-build-run.git
 # install base packages needed in the VM for builds to through
 sudo sh vpp-hc-build-run/install-prerequisite-packages
 
-# pull code and build for all projects - vpp, honeycomb, hc2vpp
+# pull code and build for all projects - vpp, honeycomb, hc2vpp. 
+# You may change below WS path where the code pull and build will happen
+export WS_HOME="$HOME/WS"
 sh vpp-hc-build-run/setup-ws-and-build-all
 
 # run vpp and honecomb
