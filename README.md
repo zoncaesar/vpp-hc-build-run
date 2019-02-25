@@ -25,5 +25,11 @@ export WS_HOME="$HOME/WS"
 
 sh vpp-hc-build-run/setup-ws-and-build-all
 
-# run vpp and honecomb
+# run vpp and honecomb. This installs VPP debian packages which starts VPP also. Starts honeycomb. 
 sudo sh vpp-hc-build-run/run-vpp-hc
+
+# Install Postmap GUI app from Ubuntu 18.04 in build applications app. This will be useful to test RESTCONF 
+
+# use below wiki to try NetConf and RestConf examples 
+https://docs.fd.io/hc2vpp/1.17.04-SNAPSHOT/release-notes-aggregator/user_running_honeycomb.html#_testing_honeycomb_agent
+
