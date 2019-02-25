@@ -9,15 +9,21 @@ https://github.com/gyanranjan/vpp-build-dev-test-env
 
 sudo apt-get update
 
+# install git tool if not present already
 sudo apt-get install git
 
+# pull all the scripts needed to be run from this git-hub
 git clone https://github.com/zoncaesar/vpp-hc-build-run.git
 
-cd vpp-hc-build-run
+# install base packages needed in the VM for builds to through
+sudo sh vpp-hc-build-run/install-prerequisite-packages
 
-sudo sh install-prerequisite-packages
+# pull code and build for all projects - vpp, honeycomb, hc2vpp. 
+# You may change below WS path where the code pull and build will happen
 
-sh setup-ws-and-build-all
+export WS_HOME="$HOME/WS"
 
-sudo sh run-vpp-hc
+sh vpp-hc-build-run/setup-ws-and-build-all
 
+# run vpp and honecomb
+sudo sh vpp-hc-build-run/run-vpp-hc
