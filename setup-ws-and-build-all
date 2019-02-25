@@ -1,0 +1,12 @@
+
+export WS_DIR="/home/`whoami`/WS"
+mkdir $WS_DIR
+
+cd $WS_DIR
+git clone https://github.com/gyanranjan/vpp-build-dev-test-env.git
+
+sh vpp-build-dev-test-env/vpp_build_one_time_run
+
+sh vpp-build-dev-test-env/vpp_build_build_all
+
+

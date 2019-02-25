@@ -1,0 +1,8 @@
+cd $WS_DIR
+cd vpp/build-root
+dpkg -i *.deb
+
+cd $WS_DIR
+cd hc2vpp
+sh vpp-integration/minimal-distribution/target/vpp-integration-distribution-1.18.10-RC1-hc/vpp-integration-distribution-1.18.10-RC1/honeycomb
+
