@@ -1,0 +1,63 @@
+
+# configure vhost interface with name vhost4
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d interface.cfg http://localhost:8183/restconf/config/ietf-interfaces:interfaces/interface/vhost4
+
+
+# read entire interfaces config 
+curl -u admin:admin http://localhost:8183/restconf/config/ietf-interfaces:interfaces
+
+# get interfaces operational status
+curl -u admin:admin http://localhost:8183/restconf/operational/ietf-interfaces:interfaces-state/
+
+# to delete interface with name vhost4
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X DELETE http://localhost:8183/restconf/config/ietf-interfaces:interfaces/interface/vhost4
+
+# to set an existing interface 'local0' state to down (for making it up, make "enabled":"true"
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d '{"interface":[{"name":"local0","description":"for testing purposes","type":"iana-if-type:ethernetCsmacd","enabled":"false"}]}' http://localhost:8183/restconf/config/ietf-interfaces:interfaces/interface/local0
+
+
+
+
+
+
+
+# configure fib table (VRF definitions)
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d @fib_table.cfg http://localhost:8183/restconf/config/vpp-fib-table-management:fib-table-management/fib-tables/
+
+# read fib table config data
+curl -u admin:admin http://localhost:8183/restconf/config/vpp-fib-table-management:fib-table-management/fib-tables/
+# OR
+curl -u admin:admin http://localhost:8183/restconf/config/vpp-fib-table-management:fib-table-management/
+
+# read fib table Operational data 
+curl -u admin:admin http://localhost:8183/restconf/operational/vpp-fib-table-management:fib-table-management
+
+
+
+
+# configure a static route 
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d @route.cfg http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/
+
+# read routes config
+curl -u admin:admin http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/
+
+# to delete routes config
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X DELETE http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/
+
+
+# add a new route to already added ipv4 static control protocol group
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d @newroute.cfg http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/hc2vpp-ietf-routing:control-plane-protocols/hc2vpp-ietf-routing:control-plane-protocol/hc2vpp-ietf-routing:static/test-routing-protocol-1/static-routes/ipv4/route/192.168.2.14%2F32
+
+# delete a specific route (say the same as addded above)
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X DELETE -d http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/hc2vpp-ietf-routing:control-plane-protocols/hc2vpp-ietf-routing:control-plane-protocol/hc2vpp-ietf-routing:static/test-routing-protocol-1/static-routes/ipv4/route/192.168.2.14%2F32
+
+
+
+
+# configure many routes in one shot (add multiple leaf elements in the same request)
+curl -H 'Content-Type: application/json' -H 'Accept: application/json' -u admin:admin -X PUT -d @multiroute.cfg http://localhost:8183/restconf/config/hc2vpp-ietf-routing:routing/hc2vpp-ietf-routing:control-plane-protocols/hc2vpp-ietf-routing:control-plane-protocol/hc2vpp-ietf-routing:static/test-routing-protocol-1/static-routes/ipv4/route/192.168.2.14%2F32
+
+
+# configure many routes one after another (to check performance of multiple restconf calls)
+sh add_new_routes.sh
+
