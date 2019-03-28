@@ -4,6 +4,8 @@ sudo apt-get update -y
 
 WS_DIR="/home/`whoami`/VPP-WS"
 
+mkdir $WS_DIR
+
 cd $WS_DIR
 git clone https://gerrit.fd.io/r/vpp
 cd vpp
