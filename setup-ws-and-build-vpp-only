@@ -1,0 +1,32 @@
+#!/bin/bash
+
+sudo apt-get update -y
+
+WS_DIR="/home/`whoami`/VPP-WS"
+
+cd $WS_DIR
+git clone https://gerrit.fd.io/r/vpp
+cd vpp
+#git checkout tags/v18.10-rc2 -b v18.10-rc2
+
+cd $WS_DIR
+cd vpp
+make install-dep
+make install-ext-deps build pkg-deb
+
+cd $WS_DIR
+cd vpp
+echo "jvpp-ioamexport
+    jvpp-core
+    jvpp-gtpu
+    jvpp-ioampot
+    jvpp-nat
+    jvpp-pppoe
+    jvpp-registry
+    jvpp-core
+    jvpp-ioamtrace
+    jvpp-nsh
+    jvpp-ioamexport
+    jvpp-benchmark
+    jvpp-acl" | xargs -I {} mvn install:install-file -Dfile=$WS_DIR/vpp/build-root/build-vpp-native/japi/java/{}-18.10.jar -DgroupId=io.fd.vpp -DartifactId={} -Dversion=18.10-SNAPSHOT -Dpackaging=jar
+
