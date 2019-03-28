@@ -21,7 +21,7 @@ sudo sh vpp-hc-build-run/install-prerequisite-packages
 # pull code and build for all projects - vpp, honeycomb, hc2vpp. 
 # You may change below WS path where the code pull and build will happen
 
-export WS_HOME="$HOME/WS"
+export WS_HOME="$HOME/VPP-WS"
 
 sh vpp-hc-build-run/setup-ws-and-build-all
 
